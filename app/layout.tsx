@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Header from "@/components/sections/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Advanced Lithium Batteries | High Performance Power Solutions",
+  title:
+    "LongLife - Advanced Lithium Batteries | High Performance Power Solutions",
   description:
     "Discover our range of high-performance lithium batteries. Engineered for reliability and longevity.",
 };
@@ -25,6 +27,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Header />
           {children}
         </ThemeProvider>
       </body>

@@ -1,10 +1,17 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Battery, Zap, ChevronRight } from "lucide-react"
-import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button";
+import { Battery, Zap, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Hero() {
+  const scrollToProducts = () => {
+    const productsSection = document.getElementById("products");
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="relative overflow-hidden bg-background pt-16 md:pt-20 xl:pt-24">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none" />
@@ -24,15 +31,24 @@ export default function Hero() {
                 Power Your E-Rickshaw with Advanced Lithium Technology
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">
-                Transform your E-rickshaw with our high-performance lithium batteries. 
-                Longer range, faster charging, and superior reliability for maximum earnings.
+                Transform your E-rickshaw with our high-performance lithium
+                batteries. Longer range, faster charging, and superior
+                reliability for maximum earnings.
               </p>
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4 justify-center lg:justify-start">
-                <Button size="lg" className="bg-primary hover:bg-primary/90">
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90"
+                  onClick={scrollToProducts}
+                >
                   View E-Rickshaw Batteries
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-primary text-primary hover:bg-primary/10"
+                >
                   Calculate Savings
                 </Button>
               </div>
@@ -41,13 +57,17 @@ export default function Hero() {
                   <div className="p-2 rounded-full bg-primary/10">
                     <Zap className="h-5 w-5 text-primary" />
                   </div>
-                  <span className="text-sm text-muted-foreground">6-8 Hour Runtime</span>
+                  <span className="text-sm text-muted-foreground">
+                    6-8 Hour Runtime
+                  </span>
                 </div>
                 <div className="flex items-center gap-x-2">
                   <div className="p-2 rounded-full bg-primary/10">
                     <Battery className="h-5 w-5 text-primary" />
                   </div>
-                  <span className="text-sm text-muted-foreground">2000+ Cycles</span>
+                  <span className="text-sm text-muted-foreground">
+                    2000+ Cycles
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -74,5 +94,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
