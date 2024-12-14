@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const products = [
   {
@@ -11,20 +13,36 @@ const products = [
     description: "Perfect for regular E-rickshaws",
     items: [
       {
-        name: "E-Rick 2000",
+        name: "E-Rickshaw MASTER 48V - 3YEAR",
         capacity: "100Ah",
         voltage: "48V",
-        price: "₹45,999",
+        price: "₹69,999",
         image:
-          "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&q=80",
+          "https://gist.github.com/user-attachments/assets/660c4259-b249-46b1-a761-80b5e1351de9",
       },
       {
-        name: "E-Rick 3000",
-        capacity: "120Ah",
+        name: "E-Rickshaw MASTER 48V - 3YEAR",
+        capacity: "100Ah",
         voltage: "48V",
-        price: "₹55,999",
+        price: "₹64,999",
         image:
-          "https://images.unsplash.com/photo-1661956602153-23384936a1d3?auto=format&fit=crop&q=80",
+          "https://gist.github.com/user-attachments/assets/660c4259-b249-46b1-a761-80b5e1351de9",
+      },
+      {
+        name: "E-Rickshaw MASTER 48V - 5YEAR",
+        capacity: "100Ah",
+        voltage: "48V",
+        price: "₹89,999",
+        image:
+          "https://gist.github.com/user-attachments/assets/b561df7b-0479-4e53-a500-5ef481664b9a",
+      },
+      {
+        name: "E-Rickshaw MASTER 48V - 5YEAR",
+        capacity: "100Ah",
+        voltage: "48V",
+        price: "₹94,999",
+        image:
+          "https://gist.github.com/user-attachments/assets/3bc980e4-764c-4768-957a-a192b02b90da",
       },
     ],
   },
@@ -34,20 +52,36 @@ const products = [
     description: "Enhanced performance for heavy-duty use",
     items: [
       {
-        name: "E-Rick Pro 5000",
+        name: "E-Rickshaw MASTER Pro - 5YEAR",
         capacity: "150Ah",
         voltage: "48V",
-        price: "₹65,999",
+        price: "₹129,999",
         image:
-          "https://images.unsplash.com/photo-1662986327507-f7119a0e2723?auto=format&fit=crop&q=80",
+          "https://gist.github.com/user-attachments/assets/bd28ecd4-1199-4835-a0b4-3263831f8504",
       },
       {
-        name: "E-Rick Pro 7000",
-        capacity: "180Ah",
+        name: "E-Rickshaw MASTER Pro - 8YEAR",
+        capacity: "150Ah",
         voltage: "48V",
-        price: "₹75,999",
+        price: "₹149,999",
         image:
-          "https://images.unsplash.com/photo-1671287165224-95a68d7a2dd8?auto=format&fit=crop&q=80",
+          "https://gist.github.com/user-attachments/assets/586b3938-4b38-4f95-b3c5-b680787151ca",
+      },
+      {
+        name: "E-Rickshaw MASTER Pro+ - 5YEAR",
+        capacity: "200Ah",
+        voltage: "48V",
+        price: "₹179,999",
+        image:
+          "https://gist.github.com/user-attachments/assets/fdf6fff9-203f-4f30-833a-dfd69c96119e",
+      },
+      {
+        name: "E-Rickshaw MASTER Pro+ - 8YEAR",
+        capacity: "200Ah",
+        voltage: "48V",
+        price: "₹194,999",
+        image:
+          "https://gist.github.com/user-attachments/assets/3e56bb61-2d92-4efe-8667-ffca71eae711",
       },
     ],
   },
@@ -101,7 +135,9 @@ export default function Products() {
                       className="group relative bg-background rounded-2xl p-4 shadow-lg ring-1 ring-primary/10"
                     >
                       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg">
-                        <img
+                        <Image
+                          width={690}
+                          height={460}
                           src={product.image}
                           alt={product.name}
                           className="h-full w-full object-cover object-center group-hover:opacity-90 transition"
