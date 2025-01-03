@@ -1,10 +1,7 @@
-"use client";
-
 import { openDB } from "idb";
-import { Product } from "@/types/product";
 
 const DB_NAME = "products-db";
-const STORE_NAME = "products";
+export const STORE_NAME = "products";
 
 export const db = openDB(DB_NAME, 1, {
   upgrade(db) {

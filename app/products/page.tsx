@@ -1,36 +1,12 @@
-//@ts-nocheck
-"use client";
-
-import { useEffect, useState } from "react";
-import ProductList from "@/components/products/ProductDetail";
+import { Suspense } from "react";
+import ProductList from "@/components/products/ProductList";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { productQueries } from "@/lib/db/products";
-import { Product } from "@/types/products";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const data = await productQueries.getAll();
-        setProducts(data);
-      } catch (error) {
-        console.error("Failed to load products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProducts();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  console.log("products", products);
+export default async function ProductsPage() {
+  const products = await productQueries.getAll();
 
   return (
     <div className="container mx-auto py-8">
@@ -40,7 +16,17 @@ export default function ProductsPage() {
           <Button>Add New Product</Button>
         </Link>
       </div>
-      <ProductList products={products} />
+      <Suspense
+        fallback={
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <Skeleton key={i} className="h-[300px] w-full" />
+            ))}
+          </div>
+        }
+      >
+        <ProductList products={products} />
+      </Suspense>
     </div>
   );
 }

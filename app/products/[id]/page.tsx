@@ -1,38 +1,46 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import ProductDetail from "@/components/products/ProductDetail";
 import { productQueries } from "@/lib/db/products";
-import { Product } from "@/types/products";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
+// Generate static params for all products
+export async function generateStaticParams() {
+  const products = await productQueries.getAll();
+  return products.map((product) => ({
+    id: product.id,
+  }));
+}
 
-  useEffect(() => {
-    const loadProduct = async () => {
-      try {
-        const data = await productQueries.getById(params.id);
-        if (!data) notFound();
-        setProduct(data);
-      } catch (error) {
-        console.error("Failed to load product:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProduct();
-  }, [params.id]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+// Static page component
+export default async function ProductPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const product = await productQueries.getById(params.id);
 
   if (!product) {
-    return notFound();
+    notFound();
   }
 
-  return <ProductDetail product={product} />;
+  return (
+    <Suspense
+      fallback={
+        <div className="container mx-auto py-8">
+          <Skeleton className="h-8 w-32 mb-8" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Skeleton className="aspect-video w-full" />
+            <div className="space-y-4">
+              <Skeleton className="h-6 w-3/4" />
+              <Skeleton className="h-24 w-full" />
+              <Skeleton className="h-6 w-1/4" />
+            </div>
+          </div>
+        </div>
+      }
+    >
+      <ProductDetail product={product} />
+    </Suspense>
+  );
 }

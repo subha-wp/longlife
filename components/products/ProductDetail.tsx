@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-//@ts-nocheck
 "use client";
 
 import { Product } from "@/types/products";
@@ -7,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { ArrowLeft, Pencil } from "lucide-react";
+import Image from "next/image";
 
 interface ProductDetailProps {
   product: Product;
@@ -38,10 +37,12 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {product.image_url && (
               <div className="aspect-video relative overflow-hidden rounded-lg">
-                <img
+                <Image
                   src={product.image_url}
                   alt={product.name}
-                  className="object-cover w-full h-full"
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-transform hover:scale-105"
                 />
               </div>
             )}
